@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous"></script>
+    <script src="p5/p5.min.js"></script>
+    <script src="p5/addons/p5.dom.min.js"></script>
+    <script src="p5/addons/p5.sound.min.js"></script>
+    <script src="p5/lib/p5.play.js"></script>
+    <script src="sketch.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+    <style> body {padding: 0; margin: 0; font-family: 'Press Start 2P', monospace; color: white; font-size: 2em;}
+	#p1 {position: absolute; top: 5vh; left: 43%;}
+	#p2 {position: absolute; top: 5vh; right: 43%;}
+	#pong {width: 100%; font-size: 4em; text-align: center; position: absolute; top: 20%}
+	#options {width: 100%; font-size: 1.7em; text-align: center; position: absolute; top: 60%; left: -3%}
+	#options a:hover {color: yellow}
+  #icon1, #icon2 {color: yellow; visibility: hidden;}
+	</style>
+  </head>
+  <body style="overflow: hidden">
+	<div id="p1"><b>0</b></div>
+	<div id="p2"><b>0</b></div>
+	<div id="menu">
+		<div id="pong"><b>PONG<b></div>
+		<div id="options">
+			<span id="icon1">>  </span><a id="versus" style="cursor: pointer;">Versus Player</a><br><br>
+			<span id="icon2">>  </span><a id="ia" style="cursor: pointer;">Versus IA</a>
+		</div>
+	</div>
+  </body>
+  <script>
+	$(document).ready(function(){
+		$('#p1, #p2').css('display', 'none');
+	});
+
+  $("#versus").hover(function(){
+    $("#icon1").css('visibility', 'visible');
+  }, function(){
+    $("#icon1").css('visibility', 'hidden');
+  });
+
+  $("#ia").hover(function(){
+    $("#icon2").css('visibility', 'visible');
+  }, function(){
+    $("#icon2").css('visibility', 'hidden');
+  });
+
+	$("#versus").click(function(){
+		$("#menu").css('display', 'none');
+		$('#p1, #p2').css('display', 'inline');
+		versus = true;
+    setTimeout(function(){
+  		if(random(1, -1) >= 0)
+  			bola.velocity.x = 7;
+  		else
+  			bola.velocity.x = -7;
+  		if(random(1, -1) >= 0)
+  			bola.velocity.y = random(5, 3);
+  		else
+  			bola.velocity.y = random(-3, -5);
+    }, 800);
+		ponto1 = 0;
+		ponto2 = 0;
+	});
+
+  $("#ia").click(function(){
+		$("#menu").css('display', 'none');
+		$('#p1, #p2').css('display', 'inline');
+		ia = true;
+    setTimeout(function(){
+  		bola.velocity.x = 7;
+  		if(random(1, -1) >= 0)
+  			bola.velocity.y = random(5, 3);
+  		else
+  			bola.velocity.y = random(-3, -5);
+    }, 800);
+		ponto1 = 0;
+		ponto2 = 0;
+	});
+  </script>
+</html>
